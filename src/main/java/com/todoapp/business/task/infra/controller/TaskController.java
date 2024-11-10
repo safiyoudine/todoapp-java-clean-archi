@@ -66,31 +66,4 @@ public class TaskController {
         deleteTask.execute(taskId);
         return ResponseEntity.noContent().build();
     }
-
-/*
-    @GetMapping("/tasks/user")
-    public ResponseEntity<?> getTasksForConnectedUser() {
-        List<TaskDto> taskById = taskService.getTasksForConnectedUser();
-        return new ResponseEntity<>(taskById, HttpStatus.OK);
-    }
-
-
-    @GetMapping("/tasks")
-    public ResponseEntity<?> getAllTasks(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size) {
-
-        Page<TaskDto> pagedResult = taskService.getAllTasks(page, size);
-        return ResponseEntity.ok(pagedResult);
-    }
-
-    @GetMapping("/task/{taskId}")
-    public ResponseEntity<TaskDto> getTaskByTaskId(@PathVariable("taskId") Long taskId) {
-        TaskDto taskDto = taskService.getTaskById(taskId);
-        return new ResponseEntity<>(taskDto, HttpStatus.OK);
-    }
-
-
-
- */
 }
