@@ -1,0 +1,112 @@
+### Registration
+POST http://localhost:8085/auth/signup
+Content-Type: application/json
+Accept: application/json
+
+{
+  "lastname": "Doe",
+  "firstname": "John",
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+
+### Login
+POST http://localhost:8085/auth/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+"email": "john.doe@example.com",
+"password": "securePassword123"
+}
+
+### getTaskByUserId
+GET http://localhost:8083/api/tasks?userId=1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5OTcwNzgsImV4cCI6MTczMDk5ODI3OCwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.YJil3A96XF-a_WhUBOSm3fyOwQ_cVx8USC9vjGdEB4U6MZ0sbnhCfB47Ngqk3x_w
+
+
+
+### Create task
+POST http://localhost:8083/api/task
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5OTcwNzgsImV4cCI6MTczMDk5ODI3OCwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.YJil3A96XF-a_WhUBOSm3fyOwQ_cVx8USC9vjGdEB4U6MZ0sbnhCfB47Ngqk3x_w
+
+{
+  "title": "JE TESTS",
+  "description": "This is an example task description.",
+  "dueDate": "2024-12-31T23:59:59",
+  "userId": 2,
+  "categoryId": 1
+}
+
+
+### Registration
+POST http://localhost:8083/auth/signup
+Content-Type: application/json
+Accept: application/json
+
+{
+  "lastname": "Dupont",
+  "firstname": "John",
+  "email": "Dupont.doe@example.com",
+  "password": "securePassword123"
+}
+
+### Login
+POST http://localhost:8083/auth/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "Dupont.doe@example.com",
+  "password": "securePassword123"
+}
+
+
+### getTaskByUserId
+GET http://localhost:8083/api/tasks?userId=1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5ODc2NzIsImV4cCI6MTczMDk4ODg3MiwiZW1haWwiOiJEdXBvbnQuZG9lQGV4YW1wbGUuY29tIn0.pleTBwHgu-T4AKaPymjLLTMritGsWP6kyLyd3l_-6LIxTnTYyJqPvMlqpMs7LowU
+
+### getTaskForConnectedUser
+GET http://localhost:8083/api/tasks/user
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5ODc2NzIsImV4cCI6MTczMDk4ODg3MiwiZW1haWwiOiJEdXBvbnQuZG9lQGV4YW1wbGUuY29tIn0.pleTBwHgu-T4AKaPymjLLTMritGsWP6kyLyd3l_-6LIxTnTYyJqPvMlqpMs7LowU
+
+
+
+### Create task
+POST http://localhost:8083/api/task
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5OTY5MjYsImV4cCI6MTczMDk5ODEyNiwiZW1haWwiOiJEdXBvbnQuZG9lQGV4YW1wbGUuY29tIn0.2GqAQES-PFfrv-9hqytwbI6LcbGbUEoxwNVf8EmiUW_3lGwLUOwIX0LH9UMM7wTD
+
+{
+  "title": "Example Task 2",
+  "description": "This is an example task description.",
+  "dueDate": "2024-12-31T23:59:59",
+  "userId": 1,
+  "categoryId": 1
+}
+
+### AllCategories
+GET http://localhost:8083/api/categories
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5OTY5MjYsImV4cCI6MTczMDk5ODEyNiwiZW1haWwiOiJEdXBvbnQuZG9lQGV4YW1wbGUuY29tIn0.2GqAQES-PFfrv-9hqytwbI6LcbGbUEoxwNVf8EmiUW_3lGwLUOwIX0LH9UMM7wTD
+
+
+### Create category
+POST http://localhost:8083/api/category
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5OTY5MjYsImV4cCI6MTczMDk5ODEyNiwiZW1haWwiOiJEdXBvbnQuZG9lQGV4YW1wbGUuY29tIn0.2GqAQES-PFfrv-9hqytwbI6LcbGbUEoxwNVf8EmiUW_3lGwLUOwIX0LH9UMM7wTD
+
+{
+  "label": "Java"
+}
