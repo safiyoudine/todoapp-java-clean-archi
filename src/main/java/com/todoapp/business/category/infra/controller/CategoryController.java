@@ -25,7 +25,7 @@ public class CategoryController {
 
 
     @GetMapping("/categories")
-    public ResponseEntity<?> getTasksForConnectedUser() {
+    public ResponseEntity<?> getCategories() {
         List<Category> categories = listCategories.execute();
         categories.stream().map(CategoryMapper::toDto).forEach(category -> ResponseEntity.ok().body(category));
         return new ResponseEntity<>(categories, HttpStatus.OK);
