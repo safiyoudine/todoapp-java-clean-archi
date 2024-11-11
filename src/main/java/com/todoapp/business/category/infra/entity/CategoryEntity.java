@@ -3,7 +3,7 @@ package com.todoapp.business.category.infra.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "category")
 public class CategoryEntity {
 
     @Id

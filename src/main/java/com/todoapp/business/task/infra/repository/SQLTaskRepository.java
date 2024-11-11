@@ -5,7 +5,11 @@ import com.todoapp.business.task.infra.entity.TaskEntity;
 import com.todoapp.business.task.infra.mapper.TaskMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +25,12 @@ public class SQLTaskRepository implements TaskRepository {
 
 
     @Transactional
-    public Optional<Task> findByTaskId(Long id) {
-        String sql = "SELECT t FROM task t WHERE t.taskId = :taskId";
+    public Optional<Task> findByTaskId(Long id, Long userId) {
+        String sql = "SELECT t FROM TaskEntity t WHERE t.id = :id AND t.userEntity.id = :userId";
         try {
             TaskEntity taskEntity = entityManager.createQuery(sql, TaskEntity.class)
-                    .setParameter("taskId", id)
+                    .setParameter("id", id)
+                    .setParameter("userId", userId)
                     .getSingleResult();
             return Optional.of(TaskMapper.toDomain(taskEntity));
         } catch (NoResultException e) {
@@ -34,17 +39,31 @@ public class SQLTaskRepository implements TaskRepository {
     }
 
     @Transactional
-    public Optional<Task> findByUserId(Long id) {
-        String sql = "SELECT t FROM task t WHERE t.userId = :userId";
-        try {
-            TaskEntity taskEntity = entityManager.createQuery(sql, TaskEntity.class)
-                    .setParameter("userId", id)
-                    .getSingleResult();
-            return Optional.of(TaskMapper.toDomain(taskEntity));
-        } catch (NoResultException e) {
-            return Optional.empty();
-        }
+    public Page<Task> findByUserId(Long id, int page, int size) {
+        String sql = "SELECT t FROM TaskEntity t WHERE t.userEntity.id = :userId";
+        int offset = page * size;
+
+        TypedQuery<TaskEntity> query = entityManager.createQuery(sql, TaskEntity.class)
+                .setParameter("userId", id)
+                .setFirstResult(offset)  // Définir l'offset calculé
+                .setMaxResults(size);
+
+        List<TaskEntity> taskEntities = query.getResultList();
+
+        String countQuery = "SELECT COUNT(t) FROM TaskEntity t WHERE t.userEntity.id = :userId";
+        Long total = entityManager.createQuery(countQuery, Long.class)
+                .setParameter("userId", id)
+                .getSingleResult();
+
+        List<Task> tasks = taskEntities.stream()
+                .map(TaskMapper::toDomain)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(tasks, PageRequest.of(page, size), total);
     }
+
+
+
 
     @Transactional
     public List<Task> findAll() {

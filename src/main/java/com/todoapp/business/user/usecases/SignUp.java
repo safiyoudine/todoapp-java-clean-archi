@@ -15,7 +15,7 @@ public class SignUp {
 
     public User execute(User user) {
         Optional<User> userOptional = userRepository.findByEmail(user.getEmail());
-        if (userOptional.isPresent()) {
+        if (!userOptional.isPresent()) {
             return userRepository.save(user);
         }
         return null;

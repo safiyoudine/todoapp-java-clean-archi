@@ -10,6 +10,7 @@ public class User {
     private String password;
     private UserRole userRole;
     private String token;
+    private Boolean connected;
 
     public User() {
     }
@@ -18,7 +19,7 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
-        validate();
+        validate();//EXEMPLE REGLE DDD
     }
 
     private void validate() {
@@ -86,5 +87,12 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Boolean getConnected() {
+        return connected;
+    }
+    public void setConnected(Boolean connected) {
+        this.connected = connected;
     }
 }

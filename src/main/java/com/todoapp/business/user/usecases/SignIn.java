@@ -1,6 +1,8 @@
 package com.todoapp.business.user.usecases;
 
+import com.todoapp.business.user.domain.LoginPassword;
 import com.todoapp.business.user.domain.User;
+import com.todoapp.business.user.infra.repository.UserRepository;
 import com.todoapp.business.user.infra.service.CustomUserDetails;
 import com.todoapp.business.user.infra.service.CustomUserDetailsService;
 import com.todoapp.commons.infra.jwt.JwtTokenProvider;
@@ -27,16 +29,19 @@ public class SignIn {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserRepository userRepository;
 
-    public User execute(User user) {
 
-        Authentication authentication = authenticate(user.getEmail(), user.getPassword());
+    public User execute(LoginPassword loginPassword) {
+
+        Authentication authentication = authenticate(loginPassword.getEmail(), loginPassword.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtTokenProvider.generateToken(authentication);
 
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        Long userId = userDetails.getId();
+        String email = userDetails.getUsername();
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String userRole = "";
@@ -44,7 +49,9 @@ public class SignIn {
             userRole = authority.getAuthority();
         }
 
+        User user = userDetails.getUser();
         user.setToken(token);
+        userRepository.save(user);
 
         return user;
     }

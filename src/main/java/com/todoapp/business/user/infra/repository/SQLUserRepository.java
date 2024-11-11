@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -21,9 +22,9 @@ public class SQLUserRepository implements UserRepository {
         return findByEmail(username);
     }
 
-    @Override
+    @Transactional
     public Optional<User> findByEmail(String email) {
-        String sql = "SELECT * FROM user WHERE email = :email";
+        String sql = "SELECT u FROM UserEntity u WHERE u.email = :email";  // Correction ici
         try {
             UserEntity userEntity = entityManager.createQuery(sql, UserEntity.class)
                     .setParameter("email", email)
@@ -34,7 +35,7 @@ public class SQLUserRepository implements UserRepository {
         }
     }
 
-    @Override
+    @Transactional
     public User save(User user) {
         UserEntity userEntity = UserMapper.toEntity(user);
         if(userEntity.getId() == null) {

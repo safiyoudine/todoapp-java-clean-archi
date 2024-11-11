@@ -4,7 +4,7 @@ import com.todoapp.business.user.domain.UserRole;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class UserEntity {
 
     @Id

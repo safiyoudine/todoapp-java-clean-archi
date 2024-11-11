@@ -24,14 +24,27 @@ public class SaveTask {
     private UserService userService;
 
     public Task execute(Task task) {
-        Optional<Task> taskOptional = taskRepository.findByTaskId(task.getId());
-        Optional<Category> castegoryOptional = categoryRepository.findById(task.getCategory().getId());
-        Optional<User> userOptional = userService.getAuthenticatedUsername();
-        if (!taskOptional.isPresent() && !castegoryOptional.isPresent() && !userOptional.isPresent()) {
-            task.setCategory(castegoryOptional.get());
-            task.setUser(userOptional.get());
-            return taskRepository.save(task);
+
+        Optional<Category> categoryOptional = categoryRepository.findById(task.getCategory().getId());
+        if (categoryOptional.isEmpty()) {
+            throw new IllegalArgumentException("Category not found");
         }
-        return null;
+        task.setCategory(categoryOptional.get());
+
+        Optional<User> userOptional = userService.getAuthenticatedUsername();
+        if (userOptional.isEmpty()) {
+            throw new IllegalStateException("Authenticated user not found");
+        }
+        task.setUser(userOptional.get());
+
+        if (task.getId() != null) {
+            Optional<Task> taskOptional = taskRepository.findByTaskId(task.getId(), userOptional.get().getId());
+            if (taskOptional.isEmpty()) {
+                throw new IllegalArgumentException("Task not found with the provided ID");
+            }
+            task.setId(taskOptional.get().getId());
+        }
+
+        return taskRepository.save(task);
     }
 }

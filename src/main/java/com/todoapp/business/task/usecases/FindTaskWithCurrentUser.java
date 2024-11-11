@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Optional;
 
 @Component
-public class ListTasksWithCurrentUser {
+public class FindTaskWithCurrentUser {
 
     @Autowired
     private TaskRepository taskRepository;
@@ -18,7 +18,12 @@ public class ListTasksWithCurrentUser {
     @Autowired
     private UserService userService;
 
-    public Page<Task> execute(int page, int size) {
-        return taskRepository.findByUserId(userService.getAuthenticatedUsername().get().getId(), page, size);
+    public Task execute(Long taskId) {
+        Long userId = userService.getAuthenticatedUsername().get().getId();
+        Optional<Task> taskOptional = taskRepository.findByTaskId(taskId, userId);
+        if (taskOptional.isEmpty()) {
+            throw new IllegalArgumentException("Task not found with the provided ID");
+        }
+        return taskOptional.get();
     }
 }

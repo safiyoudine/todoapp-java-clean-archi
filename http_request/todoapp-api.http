@@ -11,7 +11,7 @@ Accept: application/json
 }
 
 ### Login
-POST http://localhost:8085/auth/signin
+POST http://localhost:8083/auth/signin
 Content-Type: application/json
 Accept: application/json
 
@@ -32,13 +32,12 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5OTcwNzgsImV4cCI6MTczM
 POST http://localhost:8083/api/task
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5OTcwNzgsImV4cCI6MTczMDk5ODI3OCwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.YJil3A96XF-a_WhUBOSm3fyOwQ_cVx8USC9vjGdEB4U6MZ0sbnhCfB47Ngqk3x_w
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzEzMzA0MjYsImV4cCI6MTczMTMzMTYyNiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.b0nYlqagzhpq-WfTuBtLfPN626ym6eX8hMivYseDKgVjYbc_82yv5RwZf7_X41an
 
 {
   "title": "JE TESTS",
   "description": "This is an example task description.",
   "dueDate": "2024-12-31T23:59:59",
-  "userId": 2,
   "categoryId": 1
 }
 
@@ -76,8 +75,7 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5ODc2NzIsImV4cCI6MTczM
 GET http://localhost:8083/api/tasks/user
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzA5ODc2NzIsImV4cCI6MTczMDk4ODg3MiwiZW1haWwiOiJEdXBvbnQuZG9lQGV4YW1wbGUuY29tIn0.pleTBwHgu-T4AKaPymjLLTMritGsWP6kyLyd3l_-6LIxTnTYyJqPvMlqpMs7LowU
-
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJpYXQiOjE3MzEzMzA0MjYsImV4cCI6MTczMTMzMTYyNiwiZW1haWwiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.b0nYlqagzhpq-WfTuBtLfPN626ym6eX8hMivYseDKgVjYbc_82yv5RwZf7_X41an
 
 
 ### Create task

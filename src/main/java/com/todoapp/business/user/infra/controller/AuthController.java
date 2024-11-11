@@ -1,5 +1,6 @@
 package com.todoapp.business.user.infra.controller;
 
+import com.todoapp.business.user.domain.LoginPassword;
 import com.todoapp.business.user.domain.User;
 import com.todoapp.business.user.infra.controller.request.AuthRequest;
 import com.todoapp.business.user.infra.controller.request.SignupRequest;
@@ -38,8 +39,8 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<AuthDto> signin(@RequestBody AuthRequest authRequest) {
-        User user = UserMapper.toDomain(authRequest);
-        AuthDto authDto = UserMapper.toAuthDto(signIn.execute(user));
+        LoginPassword loginPassword = UserMapper.toDomain(authRequest);
+        AuthDto authDto = UserMapper.toAuthDto(signIn.execute(loginPassword));
         return new ResponseEntity<>(authDto, HttpStatus.OK);
     }
 

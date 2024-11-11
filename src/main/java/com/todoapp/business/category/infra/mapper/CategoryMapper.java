@@ -33,7 +33,6 @@ public class CategoryMapper {
             return null;
         }
         CategoryEntity entity = new CategoryEntity();
-        entity.setId(category.getId());
         entity.setLabel(category.getLabel());
         return entity;
     }
