@@ -62,18 +62,6 @@ public class SQLTaskRepository implements TaskRepository {
         return new PageImpl<>(tasks, PageRequest.of(page, size), total);
     }
 
-
-
-
-    @Transactional
-    public List<Task> findAll() {
-        String sql = "SELECT t FROM Task t ORDER BY t.taskId ASC";
-        List<TaskEntity> taskEntities = entityManager.createQuery(sql, TaskEntity.class).getResultList();
-        return taskEntities.stream()
-                .map(TaskMapper::toDomain)
-                .collect(Collectors.toList());
-    }
-
     @Transactional
     public Task save(Task task) {
         TaskEntity taskEntity = TaskMapper.toEntity(task);

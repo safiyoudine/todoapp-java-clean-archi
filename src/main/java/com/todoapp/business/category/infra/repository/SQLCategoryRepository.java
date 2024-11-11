@@ -21,7 +21,7 @@ public class SQLCategoryRepository implements CategoryRepository {
 
     @Override
     public Optional<Category> findById(Long id) {
-        String sql = "SELECT c FROM CategoryEntity c WHERE c.id = :id";  // Correction en JPQL
+        String sql = "SELECT c FROM CategoryEntity c WHERE c.id = :id";
         try {
             CategoryEntity categoryEntity = entityManager.createQuery(sql, CategoryEntity.class)
                     .setParameter("id", id)
@@ -34,7 +34,7 @@ public class SQLCategoryRepository implements CategoryRepository {
 
     @Transactional
     public Optional<Category> findByLabel(String label) {
-        String sql = "SELECT c FROM CategoryEntity c WHERE c.label = :label";  // Correction en JPQL
+        String sql = "SELECT c FROM CategoryEntity c WHERE c.label = :label";
         try {
             CategoryEntity categoryEntity = entityManager.createQuery(sql, CategoryEntity.class)
                     .setParameter("label", label)
@@ -47,7 +47,7 @@ public class SQLCategoryRepository implements CategoryRepository {
 
     @Transactional
     public List<Category> findAll() {
-        String sql = "SELECT c FROM CategoryEntity c";  // Correction en JPQL
+        String sql = "SELECT c FROM CategoryEntity c";
         List<CategoryEntity> categoryEntities = entityManager.createQuery(sql, CategoryEntity.class)
                 .getResultList();
         return categoryEntities.stream()

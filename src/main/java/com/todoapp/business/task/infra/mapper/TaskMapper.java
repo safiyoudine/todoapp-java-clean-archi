@@ -14,7 +14,6 @@ import com.todoapp.business.user.infra.mapper.UserMapper;
 
 public class TaskMapper {
 
-    // Mapper entre TaskEntity et Task (Domain)
     public static Task toDomain(TaskEntity entity) {
         if (entity == null) {
             return null;
@@ -73,13 +72,13 @@ public class TaskMapper {
         entity.setDueDate(task.getDueDate());
         entity.setTaskStatus(task.getTaskStatus());
         if (task.getUser() != null) {
-            UserEntity userEntity = new UserEntity();  // Créez ou recherchez l'entité User en fonction de votre logique
-            userEntity.setId(task.getUser().getId()); // Utilisez l'ID ou recherchez dans la base de données si nécessaire
+            UserEntity userEntity = new UserEntity();
+            userEntity.setId(task.getUser().getId());
             entity.setUserEntity(userEntity);
         }
 
         if (task.getCategory() != null) {
-            CategoryEntity categoryEntity = new CategoryEntity(); // Créez ou recherchez l'entité Category
+            CategoryEntity categoryEntity = new CategoryEntity();
             categoryEntity.setId(task.getCategory().getId());
             entity.setCategoryEntity(categoryEntity);
         }

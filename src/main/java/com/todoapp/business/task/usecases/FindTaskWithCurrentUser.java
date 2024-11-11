@@ -4,7 +4,6 @@ import com.todoapp.business.task.domain.Task;
 import com.todoapp.business.task.infra.repository.TaskRepository;
 import com.todoapp.business.user.infra.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
