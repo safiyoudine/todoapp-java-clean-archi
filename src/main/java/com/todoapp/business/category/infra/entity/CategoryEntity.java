@@ -3,7 +3,7 @@ package com.todoapp.business.category.infra.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 public class CategoryEntity {
 
     @Id
@@ -11,6 +11,12 @@ public class CategoryEntity {
     private long id;
 
     private String label;
+
+    public CategoryEntity() {}
+
+    public CategoryEntity(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

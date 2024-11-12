@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "task")
+@Table(name = "tasks")
 public class TaskEntity {
 
     @Id
@@ -25,11 +25,11 @@ public class TaskEntity {
     private TaskStatus taskStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_TASK_USER"))
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_TASKS_USERS"))
     private UserEntity userEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_TASK_CATEGORY"))
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_TASKS_CATEGORIES"))
     private CategoryEntity categoryEntity;
 
     public TaskEntity() {}
