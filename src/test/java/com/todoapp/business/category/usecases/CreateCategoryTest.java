@@ -45,7 +45,7 @@ class CreateCategoryTest {
 
     @Test
     public void testExecute_categoryExists() {
-        // Cas où la catégorie existe déjà, elle ne doit pas être sauvegardée et la méthode doit retourner null
+
         when(categoryRepository.findByLabel(category.getLabel())).thenReturn(Optional.of(category));
 
         Category result = createCategory.execute(category);
@@ -56,7 +56,7 @@ class CreateCategoryTest {
 
     @Test
     public void testExecute_categoryExists_noSave() {
-        // Cas où la catégorie existe déjà et on vérifie que save n'est pas appelé
+
         when(categoryRepository.findByLabel("java")).thenReturn(Optional.of(category));
 
         Category result = createCategory.execute(category);

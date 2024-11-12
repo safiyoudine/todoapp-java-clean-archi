@@ -29,7 +29,7 @@ class ListCategoriesTest {
 
     @BeforeEach
     public void setUp() {
-        // Création de catégories pour les tests
+
         category1 = new Category();
         category1.setLabel("java");
 

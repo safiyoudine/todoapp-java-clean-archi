@@ -24,7 +24,7 @@ public class SQLUserRepository implements UserRepository {
 
     @Transactional
     public Optional<User> findByEmail(String email) {
-        String sql = "SELECT u FROM UserEntity u WHERE u.email = :email";  // Correction ici
+        String sql = "SELECT u FROM UserEntity u WHERE u.email = :email";
         try {
             UserEntity userEntity = entityManager.createQuery(sql, UserEntity.class)
                     .setParameter("email", email)

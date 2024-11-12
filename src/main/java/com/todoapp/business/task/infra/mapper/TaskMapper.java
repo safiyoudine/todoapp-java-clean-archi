@@ -85,7 +85,6 @@ public class TaskMapper {
         return entity;
     }
 
-    // Mapper entre Task (Domain) et TaskDto
     public static TaskDto toDto(Task task) {
         if (task == null) {
             return null;

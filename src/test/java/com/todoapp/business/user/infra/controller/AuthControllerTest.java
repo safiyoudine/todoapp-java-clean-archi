@@ -7,7 +7,6 @@ import com.todoapp.business.user.infra.controller.request.AuthRequest;
 import com.todoapp.business.user.infra.controller.request.SignupRequest;
 import com.todoapp.business.user.infra.controller.response.AuthDto;
 import com.todoapp.business.user.infra.controller.response.UserDto;
-import com.todoapp.business.user.infra.mapper.UserMapper;
 import com.todoapp.business.user.usecases.SignIn;
 import com.todoapp.business.user.usecases.SignUp;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,7 +46,6 @@ class AuthControllerTest {
     public void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
 
-        // Initialize objects for testing
         user = new User();
         user.setId(1L);
         user.setEmail("testUser");

@@ -37,11 +37,10 @@ class SQLTaskRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        // Création des utilisateurs et catégories dans la base de données
+
         userEntityInBase = createUserEntity("saf", "saf", "test@test.com");
         categoryEntityInBase = createCategoryEntity("java");
 
-        // Création des tâches
         taskEntity = createTaskEntity(userEntityInBase, categoryEntityInBase, "Task 1", "Task 1 description", TaskStatus.COMPLETED);
         taskEntity2 = createTaskEntity(userEntityInBase, categoryEntityInBase, "Task 2", "Task 2 description", TaskStatus.COMPLETED);
     }

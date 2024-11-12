@@ -8,7 +8,6 @@ import com.todoapp.business.category.infra.entity.CategoryEntity;
 
 public class CategoryMapper {
 
-    // Mapper entre CategoryEntity et Category (Domain)
     public static Category toDomain(CategoryEntity entity) {
         if (entity == null) {
             return null;
@@ -37,7 +36,6 @@ public class CategoryMapper {
         return entity;
     }
 
-    // Mapper entre Category (Domain) et CategoryDto
     public static CategoryDto toDto(Category category) {
         if (category == null) {
             return null;

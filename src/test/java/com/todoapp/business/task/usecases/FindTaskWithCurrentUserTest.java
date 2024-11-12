@@ -58,7 +58,6 @@ class FindTaskWithCurrentUserTest {
 
     @Test
     public void testExecute_taskFound() {
-        // Cas où la tâche est trouvée pour l'utilisateur actuel
         task.setUser(user);
         when(userService.getAuthenticatedUsername()).thenReturn(Optional.of(user));
         when(taskRepository.findByTaskId(taskId, userId)).thenReturn(Optional.of(task));
@@ -67,29 +66,27 @@ class FindTaskWithCurrentUserTest {
 
         assertNotNull(result, "The task should be found");
         assertEquals(taskId, result.getId(), "The task ID should match");
-        verify(taskRepository).findByTaskId(taskId, userId);  // Vérifie que findByTaskId a bien été appelé
+        verify(taskRepository).findByTaskId(taskId, userId);
     }
 
     @Test
     public void testExecute_taskNotFound() {
-        // Cas où la tâche n'est pas trouvée pour l'utilisateur actuel
         when(userService.getAuthenticatedUsername()).thenReturn(Optional.of(user));
         when(taskRepository.findByTaskId(taskId, userId)).thenReturn(Optional.empty());
 
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> findTaskWithCurrentUser.execute(taskId));
 
         assertEquals("Task not found with the provided ID", thrown.getMessage(), "The exception message should be correct");
-        verify(taskRepository).findByTaskId(taskId, userId);  // Vérifie que findByTaskId a bien été appelé
+        verify(taskRepository).findByTaskId(taskId, userId);
     }
 
     @Test
     public void testExecute_userNotFound() {
-        // Cas où l'utilisateur actuel n'est pas trouvé
         when(userService.getAuthenticatedUsername()).thenReturn(Optional.empty());
 
         IllegalStateException thrown = assertThrows(IllegalStateException.class, () -> findTaskWithCurrentUser.execute(taskId));
 
         assertEquals("Authenticated user not found", thrown.getMessage(), "The exception message should indicate that the user is not authenticated.");
-        verify(taskRepository, never()).findByTaskId(taskId, userId);  // Vérifie que findByTaskId n'a pas été appelé
+        verify(taskRepository, never()).findByTaskId(taskId, userId);
     }
 }

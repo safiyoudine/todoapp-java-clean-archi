@@ -23,26 +23,26 @@ class DeleteTaskTest {
 
     @BeforeEach
     public void setUp() {
-        taskId = 1L;  // ID de la tâche pour les tests
+        taskId = 1L;
     }
 
     @Test
     public void testExecute_taskExists() {
-        // Cas où la tâche existe et doit être supprimée
-        doNothing().when(taskRepository).delete(taskId);  // Simulation de la suppression sans erreur
+
+        doNothing().when(taskRepository).delete(taskId);
 
         deleteTask.execute(taskId);
 
-        verify(taskRepository).delete(taskId);  // Vérifie que la méthode delete() a bien été appelée
+        verify(taskRepository).delete(taskId);
     }
 
     @Test
     public void testExecute_taskNotFound() {
-        // Cas où la tâche n'existe pas et la méthode delete() ne fait rien
-        doNothing().when(taskRepository).delete(taskId);  // Simulation de la suppression sans erreur
+
+        doNothing().when(taskRepository).delete(taskId);
 
         deleteTask.execute(taskId);
 
-        verify(taskRepository).delete(taskId);  // Vérifie que la méthode delete() a bien été appelée, même si la tâche n'existe pas
+        verify(taskRepository).delete(taskId);
     }
 }

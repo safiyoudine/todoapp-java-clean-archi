@@ -47,7 +47,6 @@ class SignInTest {
     public void setUp() {
         loginPassword = new LoginPassword("test@example.com", "validPassword");
 
-        // Mock of a valid user
         user = new User();
         user.setEmail("test@example.com");
         user.setPassword("validPassword");
@@ -58,7 +57,7 @@ class SignInTest {
 
     @Test
     public void testExecute_success() {
-        // Simulate successful login with correct password
+
         when(customUserDetailsService.loadUserByUsername(loginPassword.getEmail())).thenReturn(userDetails);
         when(passwordEncoder.matches(loginPassword.getPassword(), userDetails.getPassword())).thenReturn(true);
         when(jwtTokenProvider.generateToken(any(Authentication.class))).thenReturn("validToken");
@@ -67,29 +66,28 @@ class SignInTest {
 
         assertNotNull(result, "User should not be null");
         assertEquals("validToken", result.getToken(), "The token should be assigned to the user");
-        verify(userRepository).save(result);  // Verify that the user was saved with the new token
+        verify(userRepository).save(result);
     }
 
     @Test
     public void testExecute_badPassword() {
-        // Simulate login failure due to invalid password
+
         when(customUserDetailsService.loadUserByUsername(loginPassword.getEmail())).thenReturn(userDetails);
         when(passwordEncoder.matches(loginPassword.getPassword(), userDetails.getPassword())).thenReturn(false);
 
         BadCredentialsException thrown = assertThrows(BadCredentialsException.class, () -> signIn.execute(loginPassword));
 
         assertEquals("Invalid username or password", thrown.getMessage(), "The exception message should indicate invalid credentials");
-        verify(userRepository, never()).save(any(User.class));  // Verify that user was not saved
+        verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
     public void testExecute_userNotFound() {
-        // Simulate login failure due to user not found
         when(customUserDetailsService.loadUserByUsername(loginPassword.getEmail())).thenReturn(null);
 
         BadCredentialsException thrown = assertThrows(BadCredentialsException.class, () -> signIn.execute(loginPassword));
 
         assertEquals("Invalid username or password", thrown.getMessage(), "The exception message should indicate invalid credentials");
-        verify(userRepository, never()).save(any(User.class));  // Verify that user was not saved
+        verify(userRepository, never()).save(any(User.class));
     }
 }

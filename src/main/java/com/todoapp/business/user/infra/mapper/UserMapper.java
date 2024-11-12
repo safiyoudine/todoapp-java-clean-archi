@@ -27,7 +27,6 @@ public class UserMapper {
         return new LoginPassword(authRequest.getEmail(), authRequest.getPassword());
     }
 
-    // Mapper entre UserEntity et User (Domain)
     public static User toDomain(UserEntity entity) {
         if (entity == null) {
             return null;
@@ -56,7 +55,6 @@ public class UserMapper {
         return entity;
     }
 
-    // Mapper entre User (Domain) et UserDto
     public static UserDto toDto(User user) {
         if (user == null) {
             return null;

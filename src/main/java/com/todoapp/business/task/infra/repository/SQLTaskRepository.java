@@ -45,7 +45,7 @@ public class SQLTaskRepository implements TaskRepository {
 
         TypedQuery<TaskEntity> query = entityManager.createQuery(sql, TaskEntity.class)
                 .setParameter("userId", id)
-                .setFirstResult(offset)  // Définir l'offset calculé
+                .setFirstResult(offset)
                 .setMaxResults(size);
 
         List<TaskEntity> taskEntities = query.getResultList();

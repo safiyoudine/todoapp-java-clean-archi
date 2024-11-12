@@ -54,7 +54,7 @@ class CategoryControllerTest {
 
     @Test
     public void testGetCategories() throws Exception {
-        // Cas où des catégories existent
+
         List<Category> categories = new ArrayList<>();
         categories.add(category);
 
@@ -64,12 +64,12 @@ class CategoryControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].label").value("java"));
 
-        verify(listCategories).execute(); // Vérifie que listCategories.execute() a bien été appelé
+        verify(listCategories).execute();
     }
 
     @Test
     public void testCreateTask_categoryCreated() throws Exception {
-        // Cas où la catégorie est créée avec succès
+
         CategoryRequest categoryRequest = new CategoryRequest();
         categoryRequest.setLabel("java");
 
@@ -81,12 +81,12 @@ class CategoryControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.label").value("java"));
 
-        verify(createCategory).execute(any(Category.class));  // Vérifie que execute() a bien été appelé
+        verify(createCategory).execute(any(Category.class));
     }
 
     @Test
     public void testCreateTask_categoryAlreadyExists() throws Exception {
-        // Cas où la catégorie existe déjà et ne doit pas être créée
+
         CategoryRequest categoryRequest = new CategoryRequest();
         categoryRequest.setLabel("java");
 
@@ -97,6 +97,6 @@ class CategoryControllerTest {
                         .content("{\"label\":\"java\"}"))
                 .andExpect(status().isBadRequest());
 
-        verify(createCategory).execute(any(Category.class));  // Vérifie que execute() a bien été appelé
+        verify(createCategory).execute(any(Category.class));
     }
 }

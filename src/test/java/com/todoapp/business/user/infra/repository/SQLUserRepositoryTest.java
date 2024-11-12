@@ -36,6 +36,4 @@ class SQLUserRepositoryTest {
         assertTrue(result.isPresent());
         assertEquals("Category 1", result.get().getFirstName());
     }
-
-
 }

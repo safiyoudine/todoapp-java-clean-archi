@@ -161,7 +161,7 @@ class TaskControllerTest {
 
     @Test
     public void testDeleteTask() throws Exception {
-        // Cas où la tâche est supprimée
+
         doNothing().when(deleteTask).execute(1L);
 
         mockMvc.perform(delete("/api/task/{taskId}", 1L))
